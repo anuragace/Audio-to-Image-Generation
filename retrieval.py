@@ -33,6 +33,8 @@ def get_clip_model():
 
 @lru_cache(maxsize=4)
 def get_dataset(dataset_name: str):
+    if os.path.isdir(dataset_name):
+        return load_dataset("imagefolder", data_dir=dataset_name, split="train")
     return load_dataset(dataset_name, split="train")
 
 

@@ -39,6 +39,18 @@ app_audio_retrieval.py    Gradio audio -> Whisper -> retrieved image.
 app.py                    Full audio -> retrieval -> depth -> ControlNet -> CLIP score app.
 ```
 
+For fast local or Colab testing, set:
+
+```env
+DEFAULT_KNOWLEDGE_DATASET=data/sample_knowledge_base
+```
+
+For testing the hosted Hugging Face dataset directly, set:
+
+```env
+DEFAULT_KNOWLEDGE_DATASET=Anuragleo67/audio-to-image-sample-knowledge-base
+```
+
 ## Setup
 
 Create and activate a virtual environment:

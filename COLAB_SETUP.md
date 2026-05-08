@@ -36,7 +36,7 @@ import os
 
 os.environ["PINECONE_API_KEY"] = "your-real-pinecone-key"
 os.environ["DEFAULT_PINECONE_INDEX"] = "audio-to-image-sample"
-os.environ["DEFAULT_KNOWLEDGE_DATASET"] = "Anuragleo67/audio-to-image-sample-knowledge-base"
+os.environ["DEFAULT_KNOWLEDGE_DATASET"] = "data/sample_knowledge_base"
 os.environ["LORA_WEIGHTS_PATH"] = ""
 os.environ["PINECONE_CLOUD"] = "aws"
 os.environ["PINECONE_REGION"] = "us-east-1"
@@ -44,6 +44,8 @@ os.environ["GRADIO_SHARE"] = "true"
 ```
 
 Keep `LORA_WEIGHTS_PATH` empty until the base app works.
+
+The repo already contains a local copy of the 15-image sample dataset, so `DEFAULT_KNOWLEDGE_DATASET` is set to `data/sample_knowledge_base` for faster Colab testing. The Hugging Face dataset is still available at `Anuragleo67/audio-to-image-sample-knowledge-base`, but loading it can be slower because Colab downloads the images one by one.
 
 ## 5. Optional Hugging Face Login
 
@@ -131,4 +133,3 @@ After retrieval, depth, and ControlNet generation work, you can replace it with 
 ```python
 os.environ["LORA_WEIGHTS_PATH"] = "anuragace/your-lora-repo"
 ```
-
