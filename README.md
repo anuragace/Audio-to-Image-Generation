@@ -15,6 +15,12 @@ This project turns a spoken prompt into an image-enhancement workflow:
 
 The goal is to create an audio-to-educational-image assistant. A user can say something like "explain line of best fit in linear regression", and the app tries to retrieve a related reference image from a knowledge dataset, then regenerate or polish that image so it better matches the spoken prompt.
 
+## Beginner project guide
+
+For a detailed beginner-friendly explanation of the code, system design, Colab/Kaggle setup, Pinecone indexing, Hugging Face datasets, and LoRA choices, read:
+
+[docs/BEGINNER_PROJECT_GUIDE.md](docs/BEGINNER_PROJECT_GUIDE.md)
+
 ## Setup
 
 Create and activate a virtual environment:
