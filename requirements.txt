@@ -1,0 +1,12 @@
+datasets
+diffusers
+gradio
+numpy
+open_clip_torch
+Pillow
+pinecone
+python-dotenv
+sentencepiece
+torch
+transformers
+xformers; platform_system != "Windows"
