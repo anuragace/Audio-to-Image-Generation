@@ -1,12 +1,18 @@
+accelerate
 datasets
 diffusers
 gradio
+huggingface_hub
 numpy
 open_clip_torch
+peft
 Pillow
 pinecone
 python-dotenv
+safetensors
 sentencepiece
 torch
+torchvision
+torchaudio
 transformers
 xformers; platform_system != "Windows"

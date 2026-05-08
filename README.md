@@ -21,6 +21,24 @@ For a detailed beginner-friendly explanation of the code, system design, Colab/K
 
 [docs/BEGINNER_PROJECT_GUIDE.md](docs/BEGINNER_PROJECT_GUIDE.md)
 
+## Colab setup
+
+For the recommended GPU workflow, read:
+
+[COLAB_SETUP.md](COLAB_SETUP.md)
+
+## Progressive build scripts
+
+This repo includes smaller scripts so you can test each system piece before running the full generation app:
+
+```text
+index_dataset.py          Build Pinecone vectors from the Hugging Face dataset.
+test_text_search.py       Test prompt -> Pinecone -> image_path.
+app_text_retrieval.py     Gradio text prompt -> retrieved image.
+app_audio_retrieval.py    Gradio audio -> Whisper -> retrieved image.
+app.py                    Full audio -> retrieval -> depth -> ControlNet -> CLIP score app.
+```
+
 ## Setup
 
 Create and activate a virtual environment:

@@ -16,17 +16,24 @@ from transformers import CLIPModel, CLIPProcessor, pipeline
 
 load_dotenv()
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+LOCAL_SAMPLE_DATASET = os.path.join(PROJECT_ROOT, "data", "sample_knowledge_base")
+
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-DEFAULT_INDEX = os.getenv("DEFAULT_PINECONE_INDEX", "project-atoi-v2")
-DEFAULT_DATASET = os.getenv("DEFAULT_KNOWLEDGE_DATASET", "rxc5667/3wordsdataset_noduplicates")
-LORA_WEIGHTS_PATH = os.getenv("LORA_WEIGHTS_PATH", "rohith2812/atoi-lora-finetuned-v1")
+DEFAULT_INDEX = os.getenv("DEFAULT_PINECONE_INDEX", "audio-to-image-sample")
+DEFAULT_DATASET = os.getenv("DEFAULT_KNOWLEDGE_DATASET", "Anuragleo67/audio-to-image-sample-knowledge-base")
+LORA_WEIGHTS_PATH = os.getenv("LORA_WEIGHTS_PATH", "")
+GRADIO_SHARE = os.getenv("GRADIO_SHARE", "false").lower() == "true"
 
 INDEX_CHOICES = [
+    "audio-to-image-sample",
     "project-atoi-v2",
     "project-atoi",
 ]
 
 DATASET_CHOICES = [
+    LOCAL_SAMPLE_DATASET,
+    "Anuragleo67/audio-to-image-sample-knowledge-base",
     "rohith2812/atoigeneration-final-data",
     "rxc5667/3wordsdataset_noduplicates",
 ]
@@ -46,6 +53,8 @@ pc = Pinecone(api_key=PINECONE_API_KEY)
 
 @lru_cache(maxsize=2)
 def get_dataset(dataset_name: str):
+    if os.path.isdir(dataset_name):
+        return load_dataset("imagefolder", data_dir=dataset_name, split="train")
     return load_dataset(dataset_name, split="train")
 
 
@@ -137,7 +146,8 @@ def retrieve_image_from_text_prompt(prompt: str, selected_index: str, knowledge_
         return None
 
     for item in dataset:
-        if item["image_path"].endswith(image_path):
+        item_path = item.get("image_path") or item.get("file_name")
+        if item_path and item_path.endswith(image_path):
             return {"image": item["image"], "description": description}
 
     return None
@@ -270,4 +280,4 @@ with gr.Blocks(title="Audio-to-Image Generation") as demo:
 
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(share=GRADIO_SHARE)
